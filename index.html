@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spesial Buat Alyaa Maitsa Ulaa ✨</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #000000;
+            overflow-x: hidden;
+        }
+        /* Canvas Background Animasi Hati */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        /* Container Card di atas Canvas */
+        main {
+            z-index: 10;
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-100 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-pink-500 selection:text-white">
+
+    <!-- CANVAS BACKGROUND: HATI BERBULU BERDENYUT OTOMATIS -->
+    <canvas id="heartCanvas"></canvas>
+
+    <!-- AUDIO PLAYER TERSEMBUNYI (Dudy Oris - Aku Yang Jatuh Cinta) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- CONTAINER KARTU UTAMA -->
+    <main class="w-full max-w-sm bg-slate-900/85 backdrop-blur-md rounded-3xl p-6 shadow-2xl border border-pink-500/30 relative overflow-hidden text-center">
+        
+        <!-- ================= SLIDE 1: OPENING RAHASIA ================= -->
+        <div id="slide1" class="slide active flex-col items-center space-y-5 py-4">
+            <div class="w-20 h-20 bg-pink-500/10 rounded-full flex items-center justify-center text-4xl border border-pink-500/30 animate-bounce shadow-[0_0_20px_rgba(244,114,182,0.3)]">
+                💌
+            </div>
+            <div class="space-y-2">
+                <span class="text-[10px] font-bold text-pink-400 tracking-widest uppercase bg-pink-500/10 px-3 py-1 rounded-full border border-pink-500/20">
+                    Pesan Khusus
+                </span>
+                <h1 class="text-xl font-extrabold text-white pt-1">
+                    Hai, Seseorang yang Spesial... 👀
+                </h1>
+                <p class="text-slate-300 text-xs leading-relaxed px-1">
+                    Ada pesan singkat buat seseorang yang sukses bikin cowok yang 3 tahun betah jomblo ini tiba-tiba luluh. Penasaran siapa?
+                </p>
+            </div>
+            <!-- Tombol Pemicu Utama Lagu (Mulai Detik 0:10) & Pindah Slide -->
+            <button onclick="mulaiWeb()" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold py-3 px-6 rounded-2xl shadow-lg shadow-pink-900/40 transition transform active:scale-95 text-sm">
+                Buka Pesannya ✨
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 2: FOTO 1 & THE REVEAL ================= -->
+        <div id="slide2" class="slide flex-col items-center space-y-3 py-2">
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold text-pink-400 tracking-widest uppercase bg-pink-500/10 px-3 py-1 rounded-full border border-pink-500/20">
+                    The One and Only
+                </span>
+                <h2 class="text-lg font-extrabold text-pink-300 pt-1">
+                    Alyaa Maitsa Ulaa ✨
+                </h2>
+            </div>
+
+            <!-- FOTO DIA 1 -->
+            <div class="relative py-1">
+                <img src="foto_dia1.jpeg" alt="Alyaa Maitsa Ulaa" class="w-40 h-48 object-cover rounded-2xl shadow-xl border-2 border-pink-500/40 mx-auto">
+            </div>
+
+            <p class="text-slate-300 text-xs leading-relaxed px-1">
+                Orangnya cantik, manis, dan entah kenapa kehadirannya sukses bikin suasana hari-hariku jadi jauh lebih berwarna. 😭❤️
+            </p>
+
+            <div class="bg-pink-950/40 border border-pink-500/30 p-2.5 rounded-2xl text-[11px] text-pink-200 italic w-full">
+                "Tahukah dirimu, tahukah hatimu? Berulang kuketuk, aku mencintamu..." 🎶
+            </div>
+
+            <button onclick="nextSlide(3)" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold py-2.5 px-6 rounded-2xl shadow-lg transition text-xs">
+                Lanjut Dong ➡️
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 3: FOTO 2 & KUIS BUCIN ================= -->
+        <div id="slide3" class="slide flex-col items-center space-y-3 py-2">
+            <div class="space-y-1">
+                <span class="text-[10px] text-pink-400 font-medium uppercase tracking-wider">Pertanyaan Penting</span>
+                <h2 class="text-base font-bold text-white">Kira-kira, hal apa yang paling bikin betah? 🤔</h2>
+            </div>
+
+            <!-- FOTO DIA 2 -->
+            <div class="relative py-1">
+                <img src="foto_dia2.jpeg" alt="Alyaa Maitsa Ulaa" class="w-44 h-36 object-cover rounded-2xl shadow-xl border-2 border-pink-500/40 mx-auto">
+            </div>
+
+            <div class="space-y-2 w-full text-left pt-1">
+                <button onclick="pilihKuis('A')" class="w-full bg-slate-800/80 hover:bg-slate-700 p-2.5 rounded-xl border border-slate-700 text-xs text-slate-200 transition">
+                    <span class="font-bold text-pink-400">A.</span> Senyuman dan keramahan kamu.
+                </button>
+                <button onclick="pilihKuis('B')" class="w-full bg-slate-800/80 hover:bg-slate-700 p-2.5 rounded-xl border border-slate-700 text-xs text-slate-200 transition">
+                    <span class="font-bold text-pink-400">B.</span> Cara kamu ngobrol yang selalu bikin nyaman.
+                </button>
+                <button onclick="pilihKuis('C')" class="w-full bg-slate-800/80 hover:bg-slate-700 p-2.5 rounded-xl border border-slate-700 text-xs text-slate-200 transition">
+                    <span class="font-bold text-pink-400">C.</span> Semua hal tentang kamu emang menyenangkan! ✨
+                </button>
+            </div>
+
+            <div id="respon-kuis" class="hidden bg-pink-500/10 border border-pink-500/30 p-2 rounded-xl text-xs text-pink-300 w-full"></div>
+
+            <button id="btn-lanjut4" onclick="nextSlide(4)" class="hidden w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-2.5 px-6 rounded-2xl shadow-lg transition text-xs">
+                Buka Halaman Terakhir ➡️
+            </button>
+        </div>
+
+        <!-- ================= SLIDE 4: FOTO 3 & AJAKAN SANTAI ================= -->
+        <div id="slide4" class="slide flex-col items-center space-y-3 py-1">
+            <div class="space-y-1">
+                <span class="text-[10px] bg-pink-400/20 text-pink-300 font-bold px-2.5 py-0.5 rounded-full border border-pink-400/30 uppercase">
+                    Pesan Terakhir ☕✨
+                </span>
+                <h2 class="text-sm font-bold text-white pt-1">Ke depannya, sering-sering luangin waktu buat ngobrol & jalan bareng ya? 🥺</h2>
+            </div>
+
+            <!-- FOTO DIA 3 -->
+            <div class="relative py-1">
+                <img src="foto_dia3.jpeg" alt="Alyaa Maitsa Ulaa" class="w-40 h-48 object-cover rounded-2xl shadow-xl border-2 border-pink-500/40 mx-auto">
+            </div>
+
+            <!-- Teks Ejekan Dinamis kalau tombol Ogah disentuh -->
+            <div id="teks-ejekan" class="h-4 text-[11px] font-bold text-pink-400"></div>
+
+            <!-- Tombol Pilihan Sejajar -->
+            <div class="flex justify-center items-center gap-2.5 w-full pt-1 relative min-h-[50px]">
+                <button onclick="terimaCinta()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-white font-bold text-xs px-4 py-3 rounded-2xl shadow-lg transition flex-1 active:scale-95 z-10">
+                    Boleh Banget! 🥰
+                </button>
+
+                <button id="btn-ogah" onmouseover="aksiKabur()" ontouchstart="aksiKabur()" onclick="aksiKabur()" class="bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold text-xs px-4 py-3 rounded-2xl border border-slate-700 transition flex-1 z-20">
+                    Ogah 😜
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCRIPT LOGIKA ANIMASI HATI & INTERAKSI -->
+    <script>
+        // --- 1. LOGIKA AUDIO (AUTOPLAY LANGSUNG DETIK 0:10) ---
+        const bgMusic = document.getElementById('bgMusic');
+
+        function mulaiWeb() {
+            // Setel waktu mulai ke detik ke-10 (0:10)
+            bgMusic.currentTime = 10;
+            
+            let playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    console.log("Musik diputar mulai detik 0:10!");
+                }).catch(error => {
+                    console.log("Autoplay error:", error);
+                });
+            }
+
+            nextSlide(2);
+        }
+
+        // --- 2. LOGIKA PINDAH SLIDE ---
+        function nextSlide(n) {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide' + n).classList.add('active');
+        }
+
+        function pilihKuis(opsi) {
+            const resp = document.getElementById('respon-kuis');
+            const btn4 = document.getElementById('btn-lanjut4');
+            resp.classList.remove('hidden');
+
+            if(opsi === 'A' || opsi === 'B') {
+                resp.innerHTML = "Setuju sih, tapi opsi C paling mewakili semuanya! 😉";
+            } else {
+                resp.innerHTML = "Tepat sekali! Pokoknya emang makin bikin penasaran ✨";
+            }
+            btn4.classList.remove('hidden');
+        }
+
+        // --- 3. LOGIKA TOMBOL OGAH KABUR-KABURAN & NGEJEK ---
+        const daftarEjekan = [
+            "Wleee gak bisa dipencet! 😛", 
+            "Tombolnya ngambek, klik 'Boleh Banget' aja! 😉", 
+            "Dih, sombong amat nih! 🤨", 
+            "Masa gak mau jalan bareng sih? 🥺", 
+            "Harus mau pokoknya, titik! 💖"
+        ];
+
+        function aksiKabur() {
+            const btn = document.getElementById('btn-ogah');
+            const teksEjek = document.getElementById('teks-ejekan');
+            
+            const randomPesan = daftarEjekan[Math.floor(Math.random() * daftarEjekan.length)];
+            teksEjek.innerHTML = randomPesan;
+
+            const x = Math.floor(Math.random() * 90) - 45;
+            const y = Math.floor(Math.random() * 45) - 22;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+
+            btn.style.opacity = '0.2';
+            setTimeout(() => {
+                btn.style.opacity = '1';
+            }, 150);
+        }
+
+        function terimaCinta() {
+            alert('Ayyy asik! Janji ya sering-sering luangin waktu. Screenshot halaman ini terus kirim ke WhatsApp aku ya, Alyaa! ✨');
+        }
+
+        // --- 4. KANVAS ANIMASI HATI BERBULU (OTOMATIS BERDENYUT) ---
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        function heart(a, scale) {
+            const x = 16 * Math.pow(Math.sin(a), 3) * scale;
+            const y = -(13 * Math.cos(a) - 5 * Math.cos(2*a) - 2 * Math.cos(3*a) - Math.cos(4*a)) * scale;
+            return { x, y };
+        }
+
+        let pulse = 0;
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.save();
+            ctx.translate(width / 2, height / 2);
+
+            pulse += 0.03;
+            let currentScale = 16 + Math.sin(pulse) * 1.2; 
+
+            // Partikel Bagian Dalam (Bulu Pink)
+            for (let i = 0; i < 1200; i++) {
+                const a = Math.random() * (2 * Math.PI);
+                const sc = Math.random() * (currentScale - 0.5) + 0.5;
+                const point = heart(a, sc);
+
+                const ang = Math.atan2(point.y, point.x) + (Math.random() - 0.5);
+                const length = Math.random() * 10 + 4;
+
+                const g = Math.random() * 0.3 + 0.25;
+                const b = Math.random() * 0.3 + 0.55;
+                ctx.strokeStyle = `rgb(255, ${Math.floor(g * 255)}, ${Math.floor(b * 255)})`;
+                ctx.lineWidth = Math.random() * 0.8 + 0.4;
+
+                ctx.beginPath();
+                ctx.moveTo(point.x, point.y);
+                ctx.lineTo(point.x + length * Math.cos(ang), point.y + length * Math.sin(ang));
+                ctx.stroke();
+            }
+
+            // Garis Tepi Hati
+            for (let i = 0; i < 500; i++) {
+                const a = Math.random() * (2 * Math.PI);
+                const point = heart(a, currentScale);
+
+                const ang = Math.atan2(point.y, point.x) + (Math.random() - 0.35);
+                const length = Math.random() * 20 + 8;
+
+                const g = Math.random() * 0.3 + 0.45;
+                const b = Math.random() * 0.2 + 0.75;
+                ctx.strokeStyle = `rgb(255, ${Math.floor(g * 255)}, ${Math.floor(b * 255)})`;
+                ctx.lineWidth = Math.random() * 0.6 + 0.4;
+
+                ctx.beginPath();
+                ctx.moveTo(point.x + (Math.random() - 0.5) * 4, point.y + (Math.random() - 0.5) * 4);
+                ctx.lineTo(point.x + length * Math.cos(ang), point.y + length * Math.sin(ang));
+                ctx.stroke();
+            }
+
+            ctx.restore();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
